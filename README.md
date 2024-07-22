@@ -26,7 +26,30 @@ Test:
     http://localhost:8000/admin/
     http://localhost:8000/django-admin/
 
-## Deployment (Web Server)
+## Databases
 
+The Quick Start relies on the built in SQLite3 database support that ships with Django. This is absolutely only for development and often not enough there!  The project ought to work with MySQL or Postgres without issue.
+
+    <notes about changing DB config per install>
+
+## CMS
+
+    Wagtail?
+
+## Image Serving
+
+    IIPSRV still valid?
+
+## Search and Index
+
+    Apache Solr?
+
+## Deployment Scenarios
+
+    <test>
+    <dev | prod settings>
+    <containers>
     ...
+
+...TBC.
 

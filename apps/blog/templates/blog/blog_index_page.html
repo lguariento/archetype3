@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% load wagtailcore_tags %}
+
+{% block body_class %}template-blogindexpage{% endblock %}
+
+{% block content %}
+    <h1>{{ page.title }}</h1>
+
+    <div class="intro">{{ page.intro|richtext }}</div>
+
+    {% comment %}
+
+        Every “page” in Wagtail can call out to its parent or children from its position in the hierarchy. But why do you have to specify post.specific.intro rather than post.intro? This has to do with the way you define your model, class BlogPage(Page). The get_children() method gets you a list of instances of the Page base class. When you want to reference properties of the instances that inherit from the base class, Wagtail provides the specific method that retrieves the actual BlogPage record. While the “title” field is present on the base Page model, “intro” is only present on the BlogPage model. So you need .specific to access it.  You can simplify the template code by using the Django with tag.
+
+        {% for post in page.get_children %}
+            {% with post=post.specific %}
+
+    {% endcomment %}
+
+    {% for post in blogpages %}
+        {% with post=post.specific %}
+            <h2><a href="{% pageurl post %}">{{ post.title }}</a></h2>
+            <p>{{ post.intro }}</p>
+            {{ post.body|richtext }}
+        {% endwith %}
+    {% endfor %}
+
+{% endblock %}
